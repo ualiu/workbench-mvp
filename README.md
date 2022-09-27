@@ -19,7 +19,7 @@ Future features/itereations:
  
 With every step in the repair process, the technician will be able to add notes to the work order, and the customer is to be notified via SMS, and provided with a link where they can view the work order on their phone or web.
 
-https://youtu.be/yF5qHPRYkeU
+Watch DEMO here: https://youtu.be/yF5qHPRYkeU
 
 Technologies used: HTML, CSS, Javascript, Bootstrap, Node.js, Express.js, MongoDB
 
