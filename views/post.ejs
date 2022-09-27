@@ -1,0 +1,76 @@
+<%- include('partials/dashboards-header') -%>
+
+<div class="container card-container align-items-center">
+  
+
+    <div class="p-3 mb-2 bg-dark text-white ">
+      <h2><strong style="color: #f03566;">Customer name:</strong> <%= post.name %></h2>
+      <p><strong>Customer phone #</strong>: <%= post.phone %></p>
+      <p><strong>Customer email</strong>: <%= post.email %></p>
+      <p><strong>WO date created</strong>: <%= post.createdAt %></p>
+      <%if(post.user == user.id){ %>
+
+        <form
+        action="/post/deletePost/<%= post.id %>?_method=DELETE"
+        method="POST"
+        class="col-3 mt-4">
+        <button class="btn btn-primary" type="submit">Delete WO</button>
+      </form>
+
+    </div>
+
+  <div class="card">
+    <div class="card-header d-flex flex-column align-items-center"> 
+      
+      <table class="table">
+        <thead>
+          <th scope="col">Item type</th>
+          <th scope="col">WO details</th>
+          <th scope="col" style="color: #f03566;">Current status</th>
+          <th scope="col">Cost $</th>
+          <th scope="col">Edit the status of this WO</th>
+
+        </thead>
+      
+      <tbody>
+        <tr>
+          <td><%= post.secondTitle %></td>
+          <td><%= post.caption %></td>
+          <td><%= post.status %></td>
+          <td><%= post.cost %></td>
+          <td><form action="/post/editPost/<%= post.id %>?_method=PUT"
+            method="POST"> 
+              <select id="status" name="status">
+                <option selected>Select one</option>
+                <option value="open">Open</option>
+                <option value="working">Working</option>
+                <option value="completed">Completed</option>
+              </select>
+                <label for="status"><strong></strong></label>
+                <button type="submit" class="btn btn-primary " value="Upload">Update</button>
+              </form>           
+          </td>
+        </tr>
+      </table>
+
+            <img class="img-fluid" src="<%= post.image%>" style="float:right;width:300px;height:300px"/>
+
+            
+        <div class="container card-container">
+          <div class="p-3 mb-2 bg-dark text-white ">           
+            <a class="btn btn-primary" href="/profile">Return to Dashboard</a>
+          </div>
+        </div>
+
+        <%}%>
+
+      </div>
+    </div>
+  </div>
+
+  
+
+
+</div>
+
+<%- include('partials/footer') -%>
