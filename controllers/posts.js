@@ -1,6 +1,7 @@
 const { name } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const { sendSms } = require('../middleware/sms.js')
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -102,7 +103,7 @@ module.exports = {
   editPost: async (req, res) => {
     try {
       let post = await Post.findById(req.params.id).lean()
-      console.log(post)
+     // console.log(post)
 
       if(!post) {
         return res.render('post.ejs')
@@ -116,11 +117,14 @@ module.exports = {
             new: true,
             runValidators: true,
           })
-          if (req.body.status === 'completed') {
-              console.log('syntax')
+            if (req.body.status === 'completed') {
+                let customersNumber = post.phone
+                console.log(customersNumber)
           }
           res.redirect('/profile')
+        sendSms();
       }
+
     } catch (err) {
       console.log(err);
     }
