@@ -1,0 +1,80 @@
+
+
+<%- include('partials/dashboards-header') -%>
+
+<div class="container card-container">
+  
+</div>
+
+
+<div class="container">        
+<div class="jumbotron">
+    <div class="card-header d-flex flex-column align-items-center">         
+
+          <div class="col-6 mt-5">
+            <h2>Add a new item</h2>
+
+            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+              <div class="mb-3">
+                  <label for="title" class="form-label">Brand</label>
+                  <input type="text" class="form-control" id="title" name="title">
+              </div>
+
+              <div class="mb-3">
+                <select id="secondTitle" name="secondTitle">
+                    <option value="shoes" selected>Shoes</option>
+                    <option value="boots">Boots</option>
+                    <option value="sneakers">Sneakers</option>
+                    <option value="bag">Bag</option>
+                    <option value="other">other</option>
+                </select>
+                <label for="secondTitle">Select the type of item</label>
+            </div>
+
+              <div class="mb-3">
+                <select id="status" name="status">
+                    <option value="open" selected>Open</option>
+                    <option value="working">Working</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <label for="status">Select the status of WO</label>
+            </div>
+
+            <div class="mb-3">
+              <label for="name" class="form-label">Customer Name</label>
+              <input type="text" class="form-control" id="name" name="name">
+          </div>
+
+
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone" name="phone">
+            </div>
+
+            
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="text" class="form-control" id="email" name="email">
+          </div>
+
+
+              <div class="mb-3">
+                <label for="caption" class="form-label">Enter WO details</label>
+                <textarea class="form-control" id="caption" name="caption"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="imgUpload" class="form-label">Image</label>
+                <input type="file" accept="image/*;capture=camera" class="form-control" id="imageUpload" name="file" accept="image/*;capture=camera" >
+              </div>
+
+              <div class="mb-3">
+                <label for="cost" class="form-label">Enter Total Repair Cost</label>
+                <input type="text" class="form-control" id="cost" name="cost">
+            </div>
+
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+          </div>
+
+          </div>
+        </div>

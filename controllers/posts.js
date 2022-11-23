@@ -6,7 +6,8 @@ const { sendSms } = require('../middleware/sms.js')
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
+      const postss = await Post.find({ user: req.user.id });
+      const posts = await Post.find({status: 'open'}).lean().sort({createdAt: 'desc'});
       const activeWo = await Post.countDocuments({userId:req.user.id, status: 'active'})
       res.render("profile.ejs", { posts: posts, left: activeWo, user: req.user });
     } catch (err) {
@@ -38,14 +39,22 @@ module.exports = {
     }
   },
 
-  getFeed: async (req, res) => {
+  addCustomer: async (req, res) => {
     try {
-      const posts = await Post.find({status: 'open'}).lean().sort({createdAt: 'desc'});
-      res.render("feed.ejs", { posts: posts });
+      res.render("addCustomer.ejs");
     } catch (err) {
       console.log(err);
     }
   },
+
+  // getFeed: async (req, res) => {
+  //   try {
+  //     const posts = await Post.find({status: 'open'}).lean().sort({createdAt: 'desc'});
+  //     res.render("feed.ejs", { posts: posts });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
   getWorking: async (req, res) => {
     try {
       const posts = await Post.find( {status: 'working'} ).lean().sort({createdAt: 'desc'})

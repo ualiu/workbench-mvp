@@ -5,6 +5,7 @@
   <div class="p-3 mb-2 bg-dark text-white">
     <h4><strong style="color: #f03566;">Welcome to your dashboard, </strong></span><%= user.userName %>!</h4>
     <p><strong>You are logged in with:</strong> <%= user.email %></p>
+    <p>You have:</p>
     
     <h3 id="displayMessage"></h3>
    <!--
@@ -37,73 +38,26 @@
       </form>    
     </div>
 
-  <div class="card">
-    <div class="card-header d-flex flex-column align-items-center">         
+  <div class="row">
 
-          <div class="col-6 mt-5">
-            <h2>Add a new item</h2>
+          <div class="col-lg-12">
 
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Brand</label>
-                  <input type="text" class="form-control" id="title" name="title">
+            <ul class="list-group">
+              <% for(var i=0; i<posts.length; i++) {%>
+                <li class="list-group-item justify-content-center mt-5 card">
+      
+                    <h2><strong>Customer name</strong>: <%= posts[i].name%></h2>
+                    <h3><strong>Type of item</strong>: <%= posts[i].secondTitle%></h3>
+                    <p><strong style="color: #f03566;">WO status: </strong><span style="color: #008000"><%= posts[i].status%></span></p>
+      
+                  <div class="col-6 mt-5">
+                    <a class="btn btn-primary" href="/post/<%= posts[i]._id%>">Review this WO</a>
+                  </div>
+                </li>
+              <% } %>
+              </ul>
+      
               </div>
-
-              <div class="mb-3">
-                <select id="secondTitle" name="secondTitle">
-                    <option value="shoes" selected>Shoes</option>
-                    <option value="boots">Boots</option>
-                    <option value="sneakers">Sneakers</option>
-                    <option value="bag">Bag</option>
-                    <option value="other">other</option>
-                </select>
-                <label for="secondTitle">Select the type of item</label>
-            </div>
-
-              <div class="mb-3">
-                <select id="status" name="status">
-                    <option value="open" selected>Open</option>
-                    <option value="working">Working</option>
-                    <option value="completed">Completed</option>
-                </select>
-                <label for="status">Select the status of WO</label>
-            </div>
-
-            <div class="mb-3">
-              <label for="name" class="form-label">Customer Name</label>
-              <input type="text" class="form-control" id="name" name="name">
-          </div>
-
-
-              <div class="mb-3">
-                <label for="phone" class="form-label">Phone Number</label>
-                <input type="text" class="form-control" id="phone" name="phone">
-            </div>
-
-            
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" id="email" name="email">
-          </div>
-
-
-              <div class="mb-3">
-                <label for="caption" class="form-label">Enter WO details</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" accept="image/*;capture=camera" class="form-control" id="imageUpload" name="file" accept="image/*;capture=camera" >
-              </div>
-
-              <div class="mb-3">
-                <label for="cost" class="form-label">Enter Total Repair Cost</label>
-                <input type="text" class="form-control" id="cost" name="cost">
-            </div>
-
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
       </div>
       <div class="col-6">
         
