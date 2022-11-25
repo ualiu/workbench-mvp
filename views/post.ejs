@@ -4,10 +4,10 @@
   
 
     <div class="p-3 mb-2 bg-dark text-white ">
-      <h2><strong style="color: #f03566;">Customer name:</strong> <%= post.name %></h2>
-      <p><strong>Customer phone #</strong>: <%= post.phone %></p>
-      <p><strong>Customer email</strong>: <%= post.email %></p>
-      <p><strong>WO date created</strong>: <%= post.createdAt %></p>
+      <h2><strong style="color: #f03566;">Customer name:</strong> <%= post.customerName %></h2>
+      <p><strong>Customer phone #</strong>: <%= post.customerPhone %></p>
+      <p><strong>Customer email</strong>: <%= post.customerEmail %></p>
+      <p><strong>WO date created</strong>: <%= post.date %></p>
       <%if(post.user == user.id){ %>
 
         <form
@@ -34,15 +34,14 @@
       
       <tbody>
         <tr>
-          <td><%= post.secondTitle %></td>
-          <td><%= post.caption %></td>
+          <td><%= post.itemType %></td>
+          <td><%= post.description %></td>
           <td><%= post.status %></td>
           <td><%= post.cost %></td>
           <td><form action="/post/editPost/<%= post.id %>?_method=PUT"
             method="POST"> 
               <select id="status" name="status">
                 <option selected>Select one</option>
-                <option value="open">Open</option>
                 <option value="working">Working</option>
                 <option value="completed">Completed</option>
               </select>

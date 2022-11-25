@@ -22,7 +22,7 @@ module.exports = {
       console.log(req.body)
       let woData = null
       let woResults
-      let qry = {phone:{$regex: '^' + q, $options: 'i'}} //search qry input
+      let qry = {customerPhone:{$regex: '^' + q, $options: 'i'}} //search qry input
 
       if (q != null) {
          woResults = await Post.find(qry)
@@ -88,18 +88,17 @@ module.exports = {
       const result = await cloudinary.uploader.upload(req.file.path);
 
       await Post.create({
-        title: req.body.title,
-        secondTitle: req.body.secondTitle,
+        customerName: req.body.customerName,
+        customerPhone: req.body.customerPhone,
+        customerEmail: req.body.customerEmail,
+        itemType: req.body.itemType,
+        brand: req.body.brand,
+        description: req.body.description,
+        severity: req.body.severity,
+        cost: req.body.cost,
         status: req.body.status,
-        name: req.body.name,
-        phone: req.body.phone,
-        email: req.body.email,
-        name: req.body.name,
         image: result.secure_url,
         cloudinaryId: result.public_id,
-        caption: req.body.caption,
-        cost: req.body.cost,
-        likes: 0,
         user: req.user.id,
       });
       console.log("Post has been added!");
