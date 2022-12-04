@@ -1,0 +1,25 @@
+
+
+ <%- include('partials/dashboards-header') -%>
+
+<div class="container card-container">
+
+    <div class="p-3 mb-2 bg-dark text-white">
+      <h2><strong>Your Completed Work Orders</strong></h2>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+            
+                <h3>Number: <%= customers.customerPhone%></h3>
+                <h3>Email: <%= customers.customerEmail%></h3>
+              
+              <div class="col-6 mt-5">
+                <a class="btn btn-primary" href="/post/<%= customers._id%>">Review profile</a>
+              </div>
+
+      </div>
+  </div>
+</div>
+
+<%- include('partials/footer') -%> 

@@ -8,8 +8,10 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 router.get("/:id", ensureAuth, postsController.getPost);
 
 router.post("/getPost", postsController.getSearch);
+router.post("/getCustomer", postsController.getCustomer);
 
-router.post("/createPost", upload.single("file"), postsController.createPost);
+// router.post("/createPost", upload.single("file"), postsController.createPost);
+router.post("/createCustomer", upload.single("file"), postsController.createCustomer);
 
 router.put("/editPost/:id", postsController.editPost);
 

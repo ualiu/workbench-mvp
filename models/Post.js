@@ -2,18 +2,18 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
 
-  customerName: {
-    type: String,
-    required: true
-  },
-  customerPhone: {
-    type: String,
-    required: true
-  },
-  customerEmail: {
-    type: String,
-    required: true
-  },
+  // customerName: {
+  //   type: String,
+  //   required: true
+  // },
+  // customerPhone: {
+  //   type: String,
+  //   required: true
+  // },
+  // customerEmail: {
+  //   type: String,
+  //   required: true
+  // },
   itemType: {
     type: String,
     default: 'Shoes'
@@ -50,11 +50,14 @@ const PostSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-    user: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-
+  customer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Customer",
+  },
   // title: {
   //   type: String,
   //   required: true,

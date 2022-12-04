@@ -1,6 +1,7 @@
 const { name } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Customer = require("../models/Customer");
 const { sendSms } = require('../middleware/sms.js')
 
 module.exports = {
@@ -15,12 +16,29 @@ module.exports = {
     }
   },
 
+  addCustomer: async (req, res) => {
+    try {
+      res.render("addCustomer.ejs");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  customerProfile: async (req, res) => {
+    try {
+      const customers = await Customer.find( req.params.id );
+      res.render("customerProfile.ejs", { customers: customers });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
   getSearch: async (req, res) => {
     console.log('check')
     try {
       let q = req.body.searchInput
       console.log(req.body)
-      let woData = null
+      // let woData = null
       let woResults
       let qry = {customerPhone:{$regex: '^' + q, $options: 'i'}} //search qry input
 
@@ -39,13 +57,31 @@ module.exports = {
     }
   },
 
-  addCustomer: async (req, res) => {
+  getCustomer: async (req, res) => {
     try {
-      res.render("addCustomer.ejs");
+      let q = req.body.searchInput
+      console.log(req.body)
+      let qry = {customerPhone:{$regex: '^' + q, $options: 'i'}} //search qry input
+      let data = qry
+      let user = await Customer.findOne(data)
+
+      if (user === null) {
+          console.log('user not found')
+          // redirect to customer add page
+      } else {
+          res.render("customerProfile.ejs", { customers: user })
+        console.log("User found success!" + user)
+        // return res.render("customerProfile.ejs", { customers: user }) // load customerProfile page
+      }
+      // res.render("customerProfile.ejs", { customers: user })
+     // res.end()
     } catch (err) {
       console.log(err);
     }
   },
+
+  
+
 
   // getFeed: async (req, res) => {
   //   try {
@@ -82,27 +118,36 @@ module.exports = {
       console.log(err);
     }
   },
-  createPost: async (req, res) => {
+  createCustomer: async (req, res) => {
     try {
-      // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
+      const { customerPhone } = req.body;
+      const customer = await Customer.findOne( { customerPhone: customerPhone})
+      if (customer) {
+        console.log("this customer exists!")
+        res.redirect("/customerProfile");
+      } else {
+        // await Customer.create({
+        //   customerName: req.body.customerName,
+        //   customerPhone: req.body.customerPhone,
+        //   customerEmail: req.body.customerEmail,
+        //   itemType: req.body.itemType,
+        //   brand: req.body.brand,
+        //   description: req.body.description,
+        //   severity: req.body.severity,
+        //   cost: req.body.cost,
+        //   status: req.body.status,
+        //   image: result.secure_url,
+        //   cloudinaryId: result.public_id,
+        //   user: req.user.id,
+        // });
+        // console.log("Post has been added!");
+        res.redirect("/addCustomer.ejs");
+      }
 
-      await Post.create({
-        customerName: req.body.customerName,
-        customerPhone: req.body.customerPhone,
-        customerEmail: req.body.customerEmail,
-        itemType: req.body.itemType,
-        brand: req.body.brand,
-        description: req.body.description,
-        severity: req.body.severity,
-        cost: req.body.cost,
-        status: req.body.status,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
-        user: req.user.id,
-      });
-      console.log("Post has been added!");
-      res.redirect("/profile");
+      // Upload image to cloudinary
+      // const result = await cloudinary.uploader.upload(req.file.path);
+
+
     } catch (err) {
       console.log(err);
     }
