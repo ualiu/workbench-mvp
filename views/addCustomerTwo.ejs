@@ -1,0 +1,36 @@
+<%- include('partials/dashboards-header') -%>
+
+<div class="container card-container">
+  <div class="p-3 mb-3 bg-dark text-white">
+    <p><strong style="color: #e7d727;">Customer was not found! Please enter new customer infomratiom below</strong></p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="jumbotron">
+
+    <div class="card-header d-flex flex-column align-items-center">
+
+      <form action="/post/createCustomer" enctype="multipart/form-data" method="POST">
+        <div class="mb-3">
+
+          <div class="form-group">
+            <label for="customerName">Customers name</label>
+            <input type="text" class="form-control" id="customerName" name="customerName" placeholder="Enter customers name here">
+          </div> 
+
+          <div class="form-group">
+            <label for="customerPhone">Customers phone</label>
+            <input type="text" class="form-control" id="customerPhone" name="customerPhone" placeholder="Enter customers phone # here">
+          </div>
+
+          <div class="form-group">
+            <label for="customerEmail">Customers email</label>
+            <input type="text" class="form-control" id="customerEmail" name="customerEmail" placeholder="Enter customers email here">
+          </div>
+
+          <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+          
+    </div>
+  </div>
+</div>

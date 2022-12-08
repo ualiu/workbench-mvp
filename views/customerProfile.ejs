@@ -5,7 +5,7 @@
 <div class="container card-container">
 
     <div class="p-3 mb-2 bg-dark text-white">
-      <h2><strong>Your Completed Work Orders</strong></h2>
+      <h2><strong>Customers Information</strong></h2>
     </div>
 
     <div class="card">
@@ -15,7 +15,8 @@
                 <h3>Email: <%= customers.customerEmail%></h3>
               
               <div class="col-6 mt-5">
-                <a class="btn btn-primary" href="/post/<%= customers._id%>">Review profile</a>
+                <a class="btn btn-primary" href="/post/<%= customers._id%>">Update Customer</a>
+                <a class="btn btn-primary" href="/post/<%= customers._id%>">Add new WO</a>
               </div>
 
       </div>

@@ -68,6 +68,7 @@ module.exports = {
       if (user === null) {
           console.log('user not found')
           // redirect to customer add page
+          res.render("addCustomerTwo.ejs")
       } else {
           res.render("customerProfile.ejs", { customers: user })
         console.log("User found success!" + user)
@@ -118,14 +119,35 @@ module.exports = {
       console.log(err);
     }
   },
-  createCustomer: async (req, res) => {
+
+  createCustomer: (req, res) => {
+    Customer.create({
+          customerName: req.body.customerName,
+          customerPhone: req.body.customerPhone,
+          customerEmail: req.body.customerEmail,
+    });
+    console.log("Post has been added!");
+    res.redirect("/customerProfileTwo")
+  },
+
+  customerProfileTwo: async (req, res) => {
     try {
-      const { customerPhone } = req.body;
-      const customer = await Customer.findOne( { customerPhone: customerPhone})
-      if (customer) {
-        console.log("this customer exists!")
-        res.redirect("/customerProfile");
-      } else {
+      const customers = await Customer.findById( req.params.id );
+      res.render("customerProfileTwo.ejs", { customers: customers });
+      console.log("loaded!")
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  // createCustomer: async (req, res) => {
+  //   try {
+  //     const { customerPhone } = req.body;
+  //     const customer = await Customer.findOne( { customerPhone: customerPhone})
+  //     if (customer) {
+  //       console.log("this customer exists!")
+  //       res.redirect("/customerProfile");
+  //     } else {
         // await Customer.create({
         //   customerName: req.body.customerName,
         //   customerPhone: req.body.customerPhone,
@@ -141,17 +163,17 @@ module.exports = {
         //   user: req.user.id,
         // });
         // console.log("Post has been added!");
-        res.redirect("/addCustomer.ejs");
-      }
+      //   res.redirect("/addCustomer.ejs");
+      // }
 
       // Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
 
 
-    } catch (err) {
-      console.log(err);
-    }
-  },
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
 
   editPost: async (req, res) => {
     try {
