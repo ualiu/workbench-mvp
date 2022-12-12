@@ -2,13 +2,14 @@
 
 <div class="container card-container align-items-center">
 
-    <h2><strong style="color: #f03566;">Customer name:</strong> <%= customers.customerName %></h2>
-    <p><strong>Customer phone #</strong>: <%= customers.customerPhone %></p>
-    <p><strong>Customer email</strong>: <%= customers.customerEmail %></p>
-    <p><strong>WO date created</strong>: <%= customers.date %></p>
+    <h2><strong style="color: #f03566;">Customer name:</strong> <%= customer.customerName %></h2>
+    <p><strong>Customer email</strong>: <%= customer._id %></p>
+    <p><strong>Customer phone #</strong>: <%= customer.customerPhone %></p>
+    <p><strong>Customer email</strong>: <%= customer.customerEmail %></p>
 
-    <h3>Number: <%= customers.customerPhone%></h3>
-                <h3>Email: <%= customers.customerEmail%></h3>
-
+    <div class="col-6 mt-5">
+        <a class="btn btn-primary" href="/post/addNewWo/<%= customer._id%>">Add new WO</a>
+      </div>
+     
 
 </div>

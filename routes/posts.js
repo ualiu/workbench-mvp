@@ -4,14 +4,16 @@ const upload = require("../middleware/multer");
 const postsController = require("../controllers/posts");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
-//Post Routes - simplified for now
+//Post Routes 
 router.get("/:id", ensureAuth, postsController.getPost);
+router.get("/addNewWo/:id", postsController.addNewWo);
 
 router.post("/getPost", postsController.getSearch);
 router.post("/getCustomer", postsController.getCustomer);
 
 // router.post("/createPost", upload.single("file"), postsController.createPost);
-router.post("/createCustomer", upload.single("file"), postsController.createCustomer);
+router.post("/createCustomer", postsController.createCustomer);
+router.post("/createWo", postsController.createWo);
 
 router.put("/editPost/:id", postsController.editPost);
 

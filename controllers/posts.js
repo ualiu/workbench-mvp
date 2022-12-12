@@ -2,7 +2,8 @@ const { name } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Customer = require("../models/Customer");
-const { sendSms } = require('../middleware/sms.js')
+const { sendSms } = require('../middleware/sms.js');
+const { CustomerProfilesContext } = require("twilio/lib/rest/trusthub/v1/customerProfiles");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -110,6 +111,14 @@ module.exports = {
     }
   },
 
+  addNewWo: async (req, res) => {
+    try {
+      res.render("addFormPost.ejs");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
 
   getPost: async (req, res) => {
     try {
@@ -120,25 +129,56 @@ module.exports = {
     }
   },
 
-  createCustomer: (req, res) => {
-    Customer.create({
-          customerName: req.body.customerName,
-          customerPhone: req.body.customerPhone,
-          customerEmail: req.body.customerEmail,
-    });
-    console.log("Post has been added!");
-    res.redirect("/customerProfileTwo")
-  },
-
-  customerProfileTwo: async (req, res) => {
+  createCustomer: async (req, res) => {
     try {
-      const customers = await Customer.findById( req.params.id );
-      res.render("customerProfileTwo.ejs", { customers: customers });
-      console.log("loaded!")
+      const customer = await Customer.create({
+        customerName: req.body.customerName,
+        customerPhone: req.body.customerPhone,
+        customerEmail: req.body.customerEmail,
+        user: req.user.id,
+      });
+      console.log("Post has been added!");
+      res.render("customerProfileTwo.ejs", { customer: customer });
     } catch (err) {
       console.log(err);
     }
   },
+
+  // customerProfileTwo: async (req, res) => {
+  //   try {
+  //     const customersTwo = await Customer.findById( req.params.id );
+  //     if (customersTwo) {
+  //       res.render("customerProfileTwo.ejs", { customersTwo: customersTwo });
+  //     console.log("loaded!")
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
+
+
+  createWo: async (req, res) => {
+    try {
+      await Post.create({
+        itemType: req.body.itemType,
+        brand: req.body.brand,
+        description: req.body.description,
+        severity: req.body.severity,
+        cost: req.body.cost,
+        status: req.body.status,
+        // image: result.secure_url,
+        // cloudinaryId: result.public_id,
+        user: req.user.id,
+        customer: req.params.id
+      });
+      console.log("Post has been added!");
+      res.redirect(302, "/profile");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  
+
 
   // createCustomer: async (req, res) => {
   //   try {
