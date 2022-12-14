@@ -13,7 +13,8 @@ router.post("/getCustomer", postsController.getCustomer);
 
 // router.post("/createPost", upload.single("file"), postsController.createPost);
 router.post("/createCustomer", postsController.createCustomer);
-router.post("/createWo", postsController.createWo);
+
+router.post("/createWo/:id", postsController.createWo);
 
 router.put("/editPost/:id", postsController.editPost);
 

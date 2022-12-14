@@ -82,6 +82,36 @@ module.exports = {
     }
   },
 
+  addNewWo: async (req, res) => {
+    try {
+      const customer = await Customer.findById(req.params.id)
+      res.render("addFormPost.ejs", {customer: customer});
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  createWo: async (req, res) => {
+    try {
+      await Post.create({
+        itemType: req.body.itemType,
+        brand: req.body.brand,
+        description: req.body.description,
+        severity: req.body.severity,
+        cost: req.body.cost,
+        status: req.body.status,
+        // image: result.secure_url,
+        // cloudinaryId: result.public_id,
+        user: req.user.id,
+        customer: req.params.id
+      });
+      console.log("Post has been added!");
+      res.redirect(302, "/profile");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
   
 
 
@@ -111,13 +141,7 @@ module.exports = {
     }
   },
 
-  addNewWo: async (req, res) => {
-    try {
-      res.render("addFormPost.ejs");
-    } catch (err) {
-      console.log(err);
-    }
-  },
+  
 
 
   getPost: async (req, res) => {
@@ -157,26 +181,7 @@ module.exports = {
   // },
 
 
-  createWo: async (req, res) => {
-    try {
-      await Post.create({
-        itemType: req.body.itemType,
-        brand: req.body.brand,
-        description: req.body.description,
-        severity: req.body.severity,
-        cost: req.body.cost,
-        status: req.body.status,
-        // image: result.secure_url,
-        // cloudinaryId: result.public_id,
-        user: req.user.id,
-        customer: req.params.id
-      });
-      console.log("Post has been added!");
-      res.redirect(302, "/profile");
-    } catch (err) {
-      console.log(err);
-    }
-  },
+ 
   
 
 
