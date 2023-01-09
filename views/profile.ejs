@@ -45,10 +45,10 @@
             <ul class="list-group">
               <% for(var i=0; i<posts.length; i++) {%>
                 <li class="list-group-item justify-content-center mt-5 card">
-      
-                    <h2><strong>Customer name</strong>: <%= posts[i].customerName%></h2>
-                    <h3><strong>Type of item</strong>: <%= posts[i].itemType%></h3>
-                    <p><strong style="color: #f03566;">WO status: </strong><span style="color: #008000"><%= posts[i].status%></span></p>
+                    <h5><strong>Type of item</strong>: <%= posts[i].itemType%></h5>
+                    <h5><strong>Description</strong>: <%= posts[i].description%></h5>
+                    <p><strong >WO status: </strong><span><%= posts[i].status%></span></p>
+                    <p><strong style="color: #f03566;">Severity: </strong><span style="color: #008000"><%= posts[i].severity%></span></p>
       
                   <div class="col-6 mt-5">
                     <a class="btn btn-primary" href="/post/<%= posts[i]._id%>">Review this WO</a>

@@ -145,9 +145,14 @@ module.exports = {
 
 
   getPost: async (req, res) => {
+    
     try {
+      const customer = await Customer.find({}, {customerName: 1})
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      
+        console.log(customer)
+        res.render("post.ejs", { post: post, user: req.user, customer: customer });
+      
     } catch (err) {
       console.log(err);
     }

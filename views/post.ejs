@@ -1,12 +1,14 @@
 <%- include('partials/dashboards-header') -%>
 
 <div class="container card-container align-items-center">
+  <h2><strong style="color: #f03566;">Customer name:</strong> <%= customer.customerName %></h2>
   
 
     <div class="p-3 mb-2 bg-dark text-white ">
-      <h2><strong style="color: #f03566;">Customer name:</strong> <%= post.customerName %></h2>
+      <h2><strong style="color: #f03566;">Customer name:</strong> <%= post.customer %></h2>
       <p><strong>Customer phone #</strong>: <%= post.customerPhone %></p>
       <p><strong>Customer email</strong>: <%= post.customerEmail %></p>
+      <p><strong>WO date created</strong>: <%= post.date %></p>
       <p><strong>WO date created</strong>: <%= post.date %></p>
       <%if(post.user == user.id){ %>
 
@@ -53,7 +55,7 @@
         </tr>
       </table>
 
-            <img class="img-fluid" src="<%= post.image%>" style="float:right;width:300px;height:300px"/>
+            <!-- <img class="img-fluid" src="<%= post.image%>" style="float:right;width:300px;height:300px"/> -->
 
             
         <div class="container card-container">
