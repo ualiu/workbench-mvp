@@ -65,22 +65,24 @@ module.exports = {
       let qry = {customerPhone:{$regex: '^' + q, $options: 'i'}} //search qry input
       let data = qry
       let user = await Customer.findOne(data)
+      let jobs = await Post.find().populate('user').populate('customer')
+
+
+      console.log(jobs)
 
       if (user === null) {
           console.log('user not found')
           // redirect to customer add page
           res.render("addCustomerTwo.ejs")
       } else {
-          res.render("customerProfile.ejs", { customers: user })
+            res.render("customerProfile.ejs", { customers: user, jobs: jobs})
         console.log("User found success!" + user)
-        // return res.render("customerProfile.ejs", { customers: user }) // load customerProfile page
       }
-      // res.render("customerProfile.ejs", { customers: user })
-     // res.end()
     } catch (err) {
       console.log(err);
     }
   },
+
 
   addNewWo: async (req, res) => {
     try {
